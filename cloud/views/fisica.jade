@@ -1,24 +1,37 @@
 doctype 5
 html(ng-app='AppControl', ng-controller="controllerApp")
   head
-    title Sample App
+    title Convertidor de Unidades
     block stylesheets
-      link(src = 'http://bootswatch.com/cerulean/bootstrap.min.css',
-    rel='stylesheet', type='text/css')
+      
+      link(href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" type="text/css")
+      link(href="/stylesheets/custom.css" rel="stylesheet" type="text/css")
   body
-    h1 Hello World
-    canvas#myCanvas( width="578", height="200")
-    a.btn.btn-info(ng-click='refresh()') Cargar datos
-    .input-group
-        span.input-group-addon X
-        input.form-control.input( ng-model = 'x')
-    .input-group
-        span.input-group-addon Y
-        input.form-control.input( ng-model = 'y')
+    h1 Convertidor de Unidades
+    h2 ¿Qué quieres convertir?
+    button.btn.btn-primary(ng-click='addTime()') Tiempo
+    button.btn.btn-primary Longitud
+    button.btn.btn-primary Masa
+    //-canvas#myCanvas( width="1000px", height="400px")
+    .col-md-9
+      .page-header(ng-show='varTime')
+        h2
+          span Tiempo
+          small (Time)
+        .row
+          .col-md-4.col-xs-6(ng-repeat ='unit in unitis || unit.name=="Tiempo"')
+            .input-group
+              input.form-control(type='text', ng-model='hola',id='{{unit.id}}Value')
+              .input-group-btn
+                button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+                    span(id='{{unit.id}}')
+                    span.caret
+                  ul.dropdown-menu.pull-right
+                    li(ng-repeat='field in unit.values')
+                      a(href='#', ng-bind='field.abre', ng-click='valueSelect(unit, field)')
     block customscripts
       script( src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js" )
       script( src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
       script( src = "http://code.jquery.com/jquery-2.1.0.min.js" )
       script( src = '//getbootstrap.com/dist/js/bootstrap.js')
       script( src='/javascript/controller.js')
-      
