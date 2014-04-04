@@ -1,0 +1,24 @@
+doctype 5
+html(ng-app='AppControl', ng-controller="controllerApp")
+  head
+    title Sample App
+    block stylesheets
+      link(src = 'http://bootswatch.com/cerulean/bootstrap.min.css',
+    rel='stylesheet', type='text/css')
+  body
+    h1 Hello World
+    canvas#myCanvas( width="578", height="200")
+    a.btn.btn-info(ng-click='refresh()') Cargar datos
+    .input-group
+        span.input-group-addon X
+        input.form-control.input( ng-model = 'x')
+    .input-group
+        span.input-group-addon Y
+        input.form-control.input( ng-model = 'y')
+    block customscripts
+      script( src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js" )
+      script( src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+      script( src = "http://code.jquery.com/jquery-2.1.0.min.js" )
+      script( src = '//getbootstrap.com/dist/js/bootstrap.js')
+      script( src='/javascript/controller.js')
+      

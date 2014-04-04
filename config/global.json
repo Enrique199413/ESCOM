@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "ESCOM": {
+            "applicationId": "w8l1n7hwOo1aNUN4xiG3K35e9VTydBnixUNHMRml", 
+            "masterKey": "AyK0yl53kmRpAcM82lVPwsCnfhFpKYhsvnWWDV7Z"
+        }, 
+        "_default": {
+            "link": "ESCOM"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.18"
+    }
+}
