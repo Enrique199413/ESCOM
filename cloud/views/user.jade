@@ -1,0 +1,62 @@
+extends layout
+block content
+  #a( ng-app = 'agentControl' , ng-controller = 'controllerAppAgent', ng-init='ini()')
+    .container
+      span Busqueda Avanzada de Agentes
+      .form-group.input-group.input-group-lg
+        span.input-group-addon Cell
+        input.form-control( ng-model = 'query.cell', name = 'userName',
+          placeholder = 'Cell', type = 'text', required)
+        span.input-group-addon Agent@
+        input.form-control( ng-model = 'query.agent', name = 'userName',
+          placeholder = 'Agent', type = 'text', required)
+    .row
+      .col-md-2(ng-repeat='user in agents')
+        .panel.panel-default.back
+          .panel-body
+            strong
+              span@
+              span(ng-bind='user.name')
+            img.pull-right.image(src='http://cr0ybot.github.io/ingress-logos/enl.png')
+            h3 ENLIGHTENED
+            h6.text-center INGRESS COMUNITY OPS
+            h4.pull-right(ng-bind = 'user.level', class = 'level{{user.level}}')
+            
+    .col-md-12
+      h1 Agregar nuevo Agente
+        small.label.label-default Add New Agent
+      form(role='form')
+        .form-group
+          label Nombre del Agente (Id Agent)
+          input.form-control(type='text', placeholder='Nombre del Agente',
+            ng-model = 'agent.name')
+        .form-group
+          label Correo Eléctronico (Email address)
+          input.form-control(type='email', placeholder='Enter email',
+            ng-model = 'agent.email')
+        .form-group
+          label Nivel (Level)
+          input.form-control(type='number', placeholder='1',ng-model = 'agent.level')
+        .form-group
+          label Zonas de juego (Ingress places)
+          input.form-control(type='text', placeholder='Zonas de juego',
+            ng-model = 'temp.zonas')
+        .form-group
+          label Cell (Cell's)
+          input.form-control(type='text', placeholder='Cell',
+            ng-model = 'temp.cell')
+        .form-group
+          label Teléfono (Phone Number)
+          input.form-control(type='text', placeholder='Teléfono', 
+            ng-model = 'agent.phone')
+        .form-group.label.label-danger
+          label Contraseña (Password)
+          input.form-control(type='text', placeholder='Contraseña', ng-model = 'agent.passone')
+        .form-group.label.label-danger
+          label Repetir Contraseña (Repeat Password)
+          input.form-control(type='text', placeholder='Repetir contraseña', ng-model = 'agent.passtwo')
+        button.btn.btn-active(type='button', ng-click='addAgent()')
+          | Agregar Agente
+
+  block custom-scripts
+    script( src = '/javascript/controllerAgent.js')

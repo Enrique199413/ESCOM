@@ -1,10 +1,14 @@
 
 // These two lines are required to initialize Express in Cloud Code.
 var express = require('express');
-var http = require('http');
+
+
 var app = express();
 
+
+
 //RUN LOCAL
+//var http = require('http');
 //var path        = require('path');
 
 // Global app configuration section
@@ -14,14 +18,15 @@ app.use(express.bodyParser());    // Middleware for reading request body
 
 /*RUN LOCAL*/
 
-/*
-app.use( require('less-middleware')
+
+/*app.use( require('less-middleware')
 ({
     src: __dirname.replace('/cloud','/public')
 }));
 app.use( express.static( path.join( __dirname.replace('/cloud','/public'), '') ) );
-
 */
+
+
 
 
 
@@ -31,6 +36,9 @@ app.get('/fisica', function(req, res) {
   res.render('fisica');
 });
 
+app.get('/user', function(req, res) {
+  res.render('user');
+});
 // // Example reading from the request query string of an HTTP get request.
 // app.get('/test', function(req, res) {
 //   // GET http://example.parseapp.com/test?message=hello
@@ -47,15 +55,15 @@ app.get('/fisica', function(req, res) {
 
 /*RUN LOCAL*/
 
-/*
 
 
-http.createServer( app ).listen( 4500, function () {
+
+/*http.createServer( app ).listen( 4500, function () {
     console.log( 'Express server listening on port 4500' );
-}); 
+}); */
 
 
-*/
+
 
 //Version for online
 

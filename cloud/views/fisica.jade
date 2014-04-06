@@ -1,37 +1,22 @@
-doctype 5
-html(ng-app='AppControl', ng-controller="controllerApp")
-  head
-    title Convertidor de Unidades
-    block stylesheets
-      
-      link(href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" type="text/css")
-      link(href="/stylesheets/custom.css" rel="stylesheet" type="text/css")
-  body
-    h1 Convertidor de Unidades
-    h2 ¿Qué quieres convertir?
-    button.btn.btn-primary(ng-click='addTime()') Tiempo
-    button.btn.btn-primary Longitud
-    button.btn.btn-primary Masa
-    //-canvas#myCanvas( width="1000px", height="400px")
-    .col-md-9
-      .page-header(ng-show='varTime')
-        h2
-          span Tiempo
-          small (Time)
-        .row
-          .col-md-4.col-xs-6(ng-repeat ='unit in unitis || unit.name=="Tiempo"')
-            .input-group
-              input.form-control(type='text', ng-model='hola',id='{{unit.id}}Value')
-              .input-group-btn
-                button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
-                    span(id='{{unit.id}}')
-                    span.caret
-                  ul.dropdown-menu.pull-right
-                    li(ng-repeat='field in unit.values')
-                      a(href='#', ng-bind='field.abre', ng-click='valueSelect(unit, field)')
-    block customscripts
-      script( src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js" )
-      script( src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
-      script( src = "http://code.jquery.com/jquery-2.1.0.min.js" )
-      script( src = '//getbootstrap.com/dist/js/bootstrap.js')
-      script( src='/javascript/controller.js')
+extends layout
+block content
+  .container( ng-app = 'AppControl' , ng-controller = 'controllerApp')
+    .row
+      .col-sm-6.col-md-4.col-md-offset-4
+        .account-wall
+          img.profile-img( src='http://cr0ybot.github.io/ingress-logos/enl.png', alt='')
+          form.form-signin(name = 'formLogin', novalidate )
+            .form-group.input-group.input-group-lg
+              span.input-group-addon @
+              input.form-control( ng-model = 'user.user', name = 'userName',
+                placeholder = 'Usuario', type = 'text', autofocus = 'autofocus', required)
+            .form-group
+              input.form-control( ng-model = 'user.password', type = 'password',
+              placeholder = 'Contraseña', required )
+            .form-group
+              button.btn.btn-lg.btn-primary.btn-block( ng-click = 'login()',
+                ng-disabled = 'formLogin.$invalid' )
+                | Iniciar sesión
+              span.clearfix
+block custom-scripts
+  script( src = '/javascript/controller.js')
