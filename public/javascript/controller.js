@@ -2,26 +2,24 @@ var principalApp  = angular.module( 'AppControl', [] );
 principalApp.controller( 'controllerApp', appController );
 appController.$inject = [ '$scope', '$http', '$log' ];
 function appController( scope, http ,log){
-  
-
+  Parse.initialize("w8l1n7hwOo1aNUN4xiG3K35e9VTydBnixUNHMRml",
+    "oKjyvIxJJEsreGUnOiBCjs3nPBcmrtahbp2KySHH");
+  scope.init = function(){
+    var currentUser = Parse.User.current();
+    if (currentUser) {
+      window.location = ('/allAgents');
+    }
+  }
   scope.login = function (){
-    /*var TestObject = Parse.Object.extend("TestObject");
-    var testObject = new TestObject();
-    testObject.save({foo: "bar"}).then(function(object) {
-      alert("yay! it worked");
-    });*/
-    
-
-    //NEW USERS    
-    // other fields can be set just like with Parse.Object
-    //user.set("phone", "650-555-0000");
+    console.log('Hola');
     var user = new Parse.User();
-    user.signUp(scope.user,scope.password, {
+    Parse.User.logIn(scope.user.user,scope.user.password, {
       success: function(user) {
-        window.location.href = ('/user');
+        console.log('USUSARIO LOGEADO',user);
+        window.location = ('/allAgents');
       },
       error: function(user, error) {
-        // Show the error message somewhere and let the user try again.
+        // The login failed. Check error to see why.
         alert("Error: " + error.code + " " + error.message);
       }
     });

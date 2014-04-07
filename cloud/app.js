@@ -1,8 +1,6 @@
 
 // These two lines are required to initialize Express in Cloud Code.
 var express = require('express');
-
-
 var app = express();
 
 
@@ -25,19 +23,30 @@ app.use(express.bodyParser());    // Middleware for reading request body
 }));
 app.use( express.static( path.join( __dirname.replace('/cloud','/public'), '') ) );
 */
-
-
-
-
-
 // This is an example of hooking up a request handler with a specific request
 // path and HTTP verb using the Express routing API.
 app.get('/fisica', function(req, res) {
   res.render('fisica');
 });
 
-app.get('/user', function(req, res) {
-  res.render('user');
+app.get('/allAgents',function(req, res, next){
+  console.log('*************', req.body.text);
+    next();
+    console.log('*************', req.body);
+}, function(req, res) {
+  console.log('*************22', req.body);
+  res.render('allagents');
+});
+
+app.get('/new', function(req, res) {
+  res.render('newuser');
+});
+
+app.get( '/profileview/:name', function(req, res) {
+  res.render('viewProfile',{
+    profileuser:  req.params.name
+  }  
+  );
 });
 // // Example reading from the request query string of an HTTP get request.
 // app.get('/test', function(req, res) {

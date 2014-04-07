@@ -1,0 +1,14 @@
+block content
+  .col-md-12.profile-wrapper( ng-app = 'viewControlApp', 
+    ng-controller = 'controllerAppview', ng-init = 'init("#{profileuser}")')
+      .row
+        .col-md-2
+          .panel.panel-default.back
+            .panel-body
+              strong
+                span@
+                input.form-control(ng-model='agent.name', value= '{{agent.name}}')
+              img.pull-right.image(src='/images/IngressIMG.png')
+              h3 ENLIGHTENED
+              h6.text-center INGRESS COMUNITY OPS
+              input.form-control(ng-model = 'user.level', class = 'level{{user.level}}')

@@ -1,14 +1,14 @@
 doctype 5
 html
   head
-    title Ingress Enligthened
+    title Ingress Enligthened v0.207
     meta(charset='utf-8')
     block stylesheets
       link(href="http://getbootstrap.com/dist/css/bootstrap.css", rel="stylesheet", type="text/css")
       link(href="/stylesheets/custom.css", rel="stylesheet", type="text/css")
     block custom-stylesheets
-  body
-
+  body(ng-app='general')
+    include navBar
   block content
 
   block scripts
@@ -16,5 +16,11 @@ html
     script( src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js" )
     script( src = '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
     script( src = '//getbootstrap.com/dist/js/bootstrap.js')
+    script( src = '/javascript/generalApp.js')
+    script( src = '/javascript/controller.js')
+    script( src = '/javascript/navBarController.js')
+    script( src = '/javascript/controllerAgent.js')
+    script( src = '/javascript/controllerNewAgent.js')
+    script( src = '/javascript/controllerView.js')
       
   block custom-scripts

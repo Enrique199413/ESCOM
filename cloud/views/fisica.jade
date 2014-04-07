@@ -1,22 +1,32 @@
-extends layout
-block content
-  .container( ng-app = 'AppControl' , ng-controller = 'controllerApp')
-    .row
-      .col-sm-6.col-md-4.col-md-offset-4
-        .account-wall
-          img.profile-img( src='http://cr0ybot.github.io/ingress-logos/enl.png', alt='')
-          form.form-signin(name = 'formLogin', novalidate )
-            .form-group.input-group.input-group-lg
-              span.input-group-addon @
-              input.form-control( ng-model = 'user.user', name = 'userName',
-                placeholder = 'Usuario', type = 'text', autofocus = 'autofocus', required)
-            .form-group
-              input.form-control( ng-model = 'user.password', type = 'password',
-              placeholder = 'Contraseña', required )
-            .form-group
-              button.btn.btn-lg.btn-primary.btn-block( ng-click = 'login()',
-                ng-disabled = 'formLogin.$invalid' )
-                | Iniciar sesión
-              span.clearfix
-block custom-scripts
-  script( src = '/javascript/controller.js')
+doctype 5
+html
+  head
+    title Ingress Enligthened
+    meta(charset='utf-8')
+    block stylesheets
+      link(href="http://getbootstrap.com/dist/css/bootstrap.css", rel="stylesheet", type="text/css")
+      link(href="/stylesheets/custom.css", rel="stylesheet", type="text/css")
+  body
+    .container( ng-app = 'AppControl' , ng-controller = 'controllerApp', ng-init='init()')
+      .row
+        .col-sm-6.col-md-4.col-md-offset-4
+          .account-wall
+            img.profile-img( src='http://cr0ybot.github.io/ingress-logos/enl.png', alt='')
+            form.form-signin(name = 'formLogin', novalidate )
+              .form-group.input-group.input-group-lg
+                span.input-group-addon @
+                input.form-control( ng-model = 'user.user', name = 'userName',
+                  placeholder = 'Usuario', type = 'text', autofocus = 'autofocus', required)
+              .form-group
+                input.form-control( ng-model = 'user.password', type = 'password',
+                placeholder = 'Contraseña', required )
+              .form-group
+                button.btn.btn-lg.btn-primary.btn-block( ng-click = 'login()',
+                  ng-disabled = 'formLogin.$invalid' )
+                  | Iniciar sesión
+                span.clearfix
+    script( src = '//www.parsecdn.com/js/parse-1.2.18.min.js')
+    script( src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js" )
+    script( src = '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+    script( src = '//getbootstrap.com/dist/js/bootstrap.js')
+    script( src = '/javascript/controller.js')
