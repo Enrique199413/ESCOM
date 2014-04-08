@@ -1,9 +1,14 @@
 extends layout
 block content
   .col-md-12(ng-controller='controllerNewAgent')
-      h1 Agregar nuevo Agente
-        small.label.label-default Add New Agent
+      h1.yellow Agregar nuevo Agente
       form(role='form')
+        .form-group
+          label Faction
+          select.form-control(ng-model='agent.faction')
+            //-Remplace with query for factions in Object
+            option Enlightened
+            option Resistance
         .form-group
           label Id del Agente (Id Agent)
           input.form-control(type='text', placeholder='Id del Agente',
@@ -35,11 +40,13 @@ block content
           label Teléfono (Phone Number)
           input.form-control(type='text', placeholder='Teléfono', 
             ng-model = 'agent.phone')
-        .form-group.label.label-danger
+        .form-group
           label Contraseña (Password)
-          input.form-control(type='text', placeholder='Contraseña', ng-model = 'agent.passone')
-        .form-group.label.label-danger
+          input.form-control(type='text', placeholder='Contraseña',
+            ng-model = 'tmp.passone')
+        .form-group
           label Repetir Contraseña (Repeat Password)
-          input.form-control(type='text', placeholder='Repetir contraseña', ng-model = 'agent.passtwo')
-        button.btn.btn-active(type='button', ng-click='addAgent()')
+          input.form-control(type='text', placeholder='Repetir contraseña',
+           ng-model = 'tmp.passtwo')
+        button.btn.btn-default(type='button', ng-click='addAgent()')
           | Agregar Agente

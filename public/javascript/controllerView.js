@@ -6,9 +6,9 @@ function viewControl( scope, http ,log){
     "oKjyvIxJJEsreGUnOiBCjs3nPBcmrtahbp2KySHH");
   scope.agent = [];
   scope.init = function ( username ){
+    var hola = [];
     var Agent = Parse.Object.extend("Agent");
     var query = new Parse.Query(Agent);
-    var hola = [];
     query.equalTo('name',username)
     query.find({
       success: function(results) {

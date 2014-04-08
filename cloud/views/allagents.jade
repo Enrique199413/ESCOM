@@ -2,7 +2,8 @@ extends layout
 block content
   .container( ng-controller = 'controllerAppAgent', ng-init='init()')
     span Busqueda Avanzada de Agentes
-    .form-group.input-group.input-group-lg
+    br
+    .form-group.input-group.input-group-sm
       span.input-group-addon Cell
       input.form-control( ng-model = 'cell', name = 'userName',
         placeholder = 'Cell', type = 'text', required)
@@ -11,23 +12,25 @@ block content
         placeholder = 'Agent', type = 'text', required)
     span.label.label-info {{cell}}
     .row
-      .col-md-3(ng-repeat='user in agents | filter:agente')
+      .col-md-3.col-xs-3(ng-repeat='user in agents | filter:agente')
         .panel.panel-default
           .panel-body
             .row
-              .col-md-3
-                img.pull-left.image(src='/images/IngressIMG.png')
-              .col-md-6.top
-                span.green(ng-bind='user.name')
+              .col-md-3.col-xs-3(ng-show='{{user.faction == "Resistance"}}')
+                img.pull-left.image(src='/images/Resistance.png')
+              .col-md-3.col-xs-3(ng-show='{{user.faction == "Enlightened"}}')
+                img.pull-left.image(src='/images/Enlightened.png')
+              .col-md-6.col-xs-6.top
+                span(class='{{user.faction}}',ng-bind='user.name')
                 br
                 span.yellow(ng-bind='user.AP | number:0')
                 span.yellow  AP
-              .col-md-3.top
+              .col-md-3.col-xs-3.top
                 div.yellow.pull-right.text-center
                   span(ng-bind='user.level')
                   br
                   span.smaller LEVEL
-            h3.text-center ENLIGHTENED
+            h3.text-center {{user.faction}}
             h6.text-center INGRESS COMUNITY OPS
             
-            a(href = '/profileview/{{user.name}}') Click to view
+            //-a(href = '/profileview/{{user.name}}') Click to view
