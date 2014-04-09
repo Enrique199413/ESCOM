@@ -1,52 +1,102 @@
 extends layout
 block content
-  .col-md-12(ng-controller='controllerNewAgent')
+  .row
+    .col-md-8.col-md-offset-2(ng-controller='controllerNewAgent', ng-init='init()')
       h1.yellow Agregar nuevo Agente
-      form(role='form')
+      form(role='form', name='newAgent')
         .form-group
           label Faction
-          select.form-control(ng-model='agent.faction')
+          select.form-control(ng-model='agent.faction', required)
             //-Remplace with query for factions in Object
             option Enlightened
             option Resistance
-        .form-group
+        .form-group.col-md-6
           label Id del Agente (Id Agent)
-          input.form-control(type='text', placeholder='Id del Agente',
-            ng-model = 'agent.name')
-        .form-group
+          div
+            input.form-control(type='text', placeholder='Id del Agente',
+            ng-model = 'agent.name', validation-Form, vText = 'Coloca un valor válido',
+            validationtype = 'alphanumeric', required )
+        .form-group.col-md-6
           label Nombre del Agente (Name of Agent)
-          input.form-control(type='text', placeholder='Nombre del Agente',
-            ng-model = 'agent.completename')
-        .form-group
+          div
+            input.form-control(type='text', placeholder='Nombre del Agente',
+            ng-model = 'agent.completename',validation-Form, vText = 'Coloca un valor válido',
+            validationtype = 'text', required )
+        .form-group.col-md-6
           label Correo Eléctronico (Email address)
-          input.form-control(type='email', placeholder='Enter email',
-            ng-model = 'agent.email')
-        .form-group
+          div
+            input.form-control(type='email', placeholder='Enter email',
+            ng-model = 'agent.email',validation-Form, vText = 'Coloca un valor válido',
+            validationtype = 'mail', required )
+        .form-group.col-md-6
           label Nivel (Level)
-          input.form-control(type='number', placeholder='1',ng-model = 'agent.level')
-        .form-group
-          label Zonas de juego (Ingress places)
-          input.form-control(type='text', placeholder='Zonas de juego',
-            ng-model = 'temp.zonas')
-        .form-group
-          label Cell (Cell's)
-          input.form-control(type='text', placeholder='Cell',
-            ng-model = 'temp.cell')
-        .form-group
+          div
+            input.form-control(type='number', placeholder='1',ng-model = 'agent.level',
+            validation-Form, vText = 'Coloca un valor válido',
+            validationtype = 'number', required )
+        .form-group.col-md-12
+          .row
+            .col-md-5
+              label Zonas de juego (Ingress places)
+              .input-group
+                span.input-group-addon Zona
+                div
+                  input.form-control( ng-model = 'zone',type='text',
+                  placeholder = 'Zona de juego',ng-click = 'loadZones()',
+                  typeahead="state for state in states | filter:$viewValue | limitTo:10"
+                  )
+                span.input-group-btn
+                  button.btn.btn-default( ng-click = 'addZone(zone)', 
+                    type='button' ) +
+            .col-md-7
+              label Zonas Agregadas
+              br
+              #workersRepeat.btn-group( 
+              ng-repeat = 'zone in temporalzones')
+                span.label-info.label( ng-bind = 'zone',ng-click = 'removeZone( $index )') 
+        .form-group.col-md-12
+          .row
+            .col-md-5
+              label Celdas (Cell's)
+              .input-group
+                span.input-group-addon Celda
+                div
+                  input.form-control( ng-model = 'cell',type='text',
+                  placeholder = 'Celda',ng-click = 'loadCells()',
+                  typeahead="cell for cell in cells | filter:$viewValue | limitTo:10"
+                  )
+                span.input-group-btn
+                  button.btn.btn-default( ng-click = 'addCell(cell)', 
+                    type='button' ) +
+            .col-md-7
+              label Celdas Agregadas
+              br
+              .btn-group( 
+              ng-repeat = 'cell in temporalcells')
+                span.label.label-info( ng-bind = 'cell',ng-click = 'removeCell( $index )') 
+        .form-group.col-md-6
           label AP
-          input.form-control(type='text', placeholder='AP',
-            ng-model = 'agent.AP')
-        .form-group
+          div
+            input.form-control(type='text', placeholder='AP',
+            ng-model = 'agent.AP',validation-Form, vText = 'Coloca un valor válido',
+            validationtype = 'number', required )
+        .form-group.col-md-6
           label Teléfono (Phone Number)
-          input.form-control(type='text', placeholder='Teléfono', 
-            ng-model = 'agent.phone')
-        .form-group
+          div
+            input.form-control(type='text', placeholder='Teléfono', 
+            ng-model = 'agent.phone',validation-Form, vText = 'Coloca un valor válido',
+            validationtype = 'number', required )
+        .form-group.col-md-6
           label Contraseña (Password)
-          input.form-control(type='text', placeholder='Contraseña',
-            ng-model = 'tmp.passone')
-        .form-group
+          div
+            input.form-control(type='text', placeholder='Contraseña',
+            ng-model = 'tmp.passone',validation-Form, vText = 'Coloca un valor válido',
+            validationtype = 'pass1', required )
+        .form-group.col-md-6
           label Repetir Contraseña (Repeat Password)
-          input.form-control(type='text', placeholder='Repetir contraseña',
-           ng-model = 'tmp.passtwo')
-        button.btn.btn-default(type='button', ng-click='addAgent()')
+          div
+            input.form-control(type='text', placeholder='Repetir contraseña',
+           ng-model = 'tmp.passtwo', validation-Form, vText = 'Las contraseñas no son iguales',
+            validationtype = 'pass2', required )
+        button.btn.btn-default(ng-disabled = 'newAgent.$invalid',type='button', ng-click='addAgent()')
           | Agregar Agente

@@ -1,36 +1,64 @@
 extends layout
 block content
-  .container( ng-controller = 'controllerAppAgent', ng-init='init()')
-    span Busqueda Avanzada de Agentes
-    br
-    .form-group.input-group.input-group-sm
-      span.input-group-addon Cell
-      input.form-control( ng-model = 'cell', name = 'userName',
-        placeholder = 'Cell', type = 'text', required)
-      span.input-group-addon Agent@
-      input.form-control( ng-model = 'agente', name = 'userName',
-        placeholder = 'Agent', type = 'text', required)
-    span.label.label-info {{cell}}
-    .row
-      .col-md-3.col-xs-3(ng-repeat='user in agents | filter:agente')
-        .panel.panel-default
-          .panel-body
-            .row
-              .col-md-3.col-xs-3(ng-show='{{user.faction == "Resistance"}}')
-                img.pull-left.image(src='/images/Resistance.png')
-              .col-md-3.col-xs-3(ng-show='{{user.faction == "Enlightened"}}')
-                img.pull-left.image(src='/images/Enlightened.png')
-              .col-md-6.col-xs-6.top
-                span(class='{{user.faction}}',ng-bind='user.name')
-                br
-                span.yellow(ng-bind='user.AP | number:0')
-                span.yellow  AP
-              .col-md-3.col-xs-3.top
-                div.yellow.pull-right.text-center
-                  span(ng-bind='user.level')
+  #content( ng-controller = 'controllerAppAgent', ng-init='init()')
+    .container
+      span Busqueda Avanzada de Agentes
+      br
+      .form-group.input-group.input-group-sm
+        span.input-group-addon Cell
+        input.form-control( ng-model = 'cell', name = 'userName',
+          placeholder = 'Cell', type = 'text', required)
+        span.input-group-addon Agent@
+        input.form-control( ng-model = 'agente', name = 'userName',
+          placeholder = 'Agent', type = 'text', required)
+      span.label.label-info {{cell}}
+      .row
+        .col-md-3.col-xs-3(ng-repeat='user in agents | filter:agente')
+          .panel.panel-default
+            .panel-body
+              .row
+                .col-md-3.col-xs-3(ng-show='{{user.faction == "Resistance"}}')
+                  img.pull-left.image(src='/images/Resistance.png')
+                .col-md-3.col-xs-3(ng-show='{{user.faction == "Enlightened"}}')
+                  img.pull-left.image(src='/images/Enlightened.png')
+                .col-md-6.col-xs-6.top
+                  span(class='{{user.faction}}',ng-bind='user.name')
                   br
-                  span.smaller LEVEL
-            h3.text-center {{user.faction}}
-            h6.text-center INGRESS COMUNITY OPS
-            
-            //-a(href = '/profileview/{{user.name}}') Click to view
+                  span.yellow(ng-bind='user.AP | number:0')
+                  span.yellow  AP
+                .col-md-3.col-xs-3.top
+                  div.yellow.pull-right.text-center
+                    span(ng-bind='user.level')
+                    br
+                    span.smaller LEVEL
+              h3.text-center {{user.faction}}
+              h6.text-center INGRESS COMUNITY OPS
+            button.btn.btn-default( ng-click = 'loadAgentinfo(user)')
+              | Click to view
+    #viewAgent.modal.fade( tabindex = '-1', role = 'dialog', aria-hidden = 'true' )
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title Información del agente
+            h2(class='{{userAgent.faction}}')@{{userAgent.name}}
+            span#special( ng-bind = 'userAgent.level',
+                class = 'level{{userAgent.level}}')
+          .modal-body
+            ul.list-group
+              li.list-group-item
+                span(class='{{userAgent.faction}}') {{userAgent.name}}
+                span.label.pull-right AgentID
+              li.list-group-item
+                span.yellow {{userAgent.AP | number:0}}
+                span.label.pull-right AP
+              li.list-group-item{{userAgent.faction}}
+                span.label.pull-right Faction
+              li.list-group-item{{userAgent.completename}}
+                span.label.pull-right Nombre
+              li.list-group-item{{userAgent.phone}}
+                span.label.pull-right Phone
+              li.list-group-item{{userAgent.email}}
+                span.label.pull-right email
+          .modal-footer
+            button(ng-click='close()') Ok
